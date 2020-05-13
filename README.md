@@ -30,7 +30,7 @@ We should be able to get less ```error < 2%```
 
 ### Methods to decrease the error :
   
-    1. Try splitting the given test set into Validation set and Test set in order to
+    :blush: Try splitting the given test set into Validation set and Test set in order to
         get better results.
 
     2. Try training the model for more epochs > 10 epochs
