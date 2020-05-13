@@ -14,7 +14,7 @@ This project is all about defining and training a convolutional neural network t
 
 This model takes an input image and make transformations  to it like converting it to grayscale image , reclaing it to be (224x224) and Normalizing its values to be in range [0,1].
 
-Then the image is fed to the network to predict the output facial keypoints of the input image with ~~````error ~ 2%````~~ ```error ~ .004 ```.
+Then the image is fed to the network to predict the output facial keypoints of the input image with ~~````error ~ 2%````~~      ```error ~ 0.4% ```.
 
 
 The output would be in shape ```(136,1)``` then we reshape it to be ```(68,2)``` which means a pair of values for each keypoints (x,y) that identifies the facial keypoints.
@@ -32,12 +32,12 @@ We should be able to get less ```error < 2%```
 ##### Methods to decrease the error :
 
   
- [x] ~~Try splitting the given test set into Validation set and Test set in order to get better results.~~
- [x] ~~Try training the model for more epochs > 10 epochs~~ 
- [x] ~~Try EarlyStopping to protect the model from overfitting the data~~
- [x] ~~Try different kinds of pretrained networks like AlexNet , ResNet , etc..~~
- [ ] ~~Try adding more Convolutional layers and make your model more complex.~~ ```Not Needed```
- [ ] ~~Try getting a larger data set.~~    ```Not Needed```
+ - [x] ~~Try splitting the given test set into Validation set and Test set in order to get better results.~~
+ - [x] ~~Try training the model for more epochs > 10 epochs~~ 
+ - [x] ~~Try EarlyStopping to protect the model from overfitting the data~~
+ - [x] ~~Try different kinds of pretrained networks like AlexNet , ResNet , etc..~~
+ - [ ] ~~Try adding more Convolutional layers and make your model more complex.~~ ```Not Needed```
+ - [ ] ~~Try getting a larger data set.~~    ```Not Needed```
  
 
 With these methods we can get error that is close to ```error ~ 0.5%``` ✅
@@ -53,11 +53,11 @@ Error now has decreased to ``` ~ 0.004  ``` on both **Training** and **Validatio
 
 This project uses opncv library [opencv](https://pypi.org/project/opencv-python/) and [PyTorch](https://pytorch.org/docs/stable/index.html) to install these libraries.
 
-**Install OpenCv :**
+##### Install OpenCv :
 ```bash
 pip install opencv-python
 ```
-**Install PyTorch :**
+##### Install PyTorch :
 ```bash
 pip3 install torch torchvision
 ```
@@ -65,7 +65,7 @@ pip3 install torch torchvision
 
 ## Network Architecture 
 
-Used [```ResNet```](https://medium.com/@14prakash/understanding-and-implementing-architectures-of-resnet-and-resnext-for-state-of-the-art-image-cf51669e1624) instead of the below architecture 
+Used [```ResNet```](https://medium.com/@14prakash/understanding-and-implementing-architectures-of-resnet-and-resnext-for-state-of-the-art-image-cf51669e1624) instead of the previous architecture 
 
 ```python
 import torch
@@ -106,10 +106,10 @@ optimizer = optim.Adam(filter(lambda p: p.requires_grad,net.parameters()), lr = 
 
 ```
 
-<br />
+
 ## Authors
 
-* **Ahmed Abd-Elbakey Ghonem** - [**Github**](https://github.com/3ba2ii)
+- **Ahmed Abd-Elbakey Ghonem** - [**Github**](https://github.com/3ba2ii)
 
 
 ## Contributing
