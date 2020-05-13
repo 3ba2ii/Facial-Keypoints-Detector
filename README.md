@@ -23,6 +23,9 @@ And finally we plot the output points ```(x,y)``` on the original input image to
 
 <br />
 
+ Markup : - [ ] An uncompleted task
+          - [x] A completed task
+
 
 ## What To Improve 
 
