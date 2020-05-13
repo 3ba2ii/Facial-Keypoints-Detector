@@ -1,6 +1,6 @@
 # Facial Keypoints Detection
 
-This project will be all about defining and training a convolutional neural network to perform facial keypoint detection, and using computer vision techniques to transform images of faces.
+This project is all about defining and training a convolutional neural network to perform facial keypoint detection, and using computer vision techniques to transform images of faces.
 
 <br />
 
@@ -14,7 +14,7 @@ This project will be all about defining and training a convolutional neural netw
 
 This model takes an input image and make transformations  to it like converting it to grayscale image , reclaing it to be (224x224) and Normalizing its values to be in range [0,1].
 
-Then the image is fed to the network to predict the output facial keypoints of the input image with ````error ~ 2%````.
+Then the image is fed to the network to predict the output facial keypoints of the input image with ~~````error ~ 2%````~~ ```error ~ .004 ```.
 
 
 The output would be in shape ```(136,1)``` then we reshape it to be ```(68,2)``` which means a pair of values for each keypoints (x,y) that identifies the facial keypoints.
@@ -23,157 +23,103 @@ And finally we plot the output points ```(x,y)``` on the original input image to
 
 <br />
 
- Markup : - [ ] An uncompleted task
-          - [x] A completed task
-
 
 ## What To Improve 
 
 We should be able to get less ```error < 2%``` 
 
-### Methods to decrease the error :
+
+##### Methods to decrease the error :
+
   
-    :blush: Try splitting the given test set into Validation set and Test set in order to
-        get better results.
+ [x] ~~Try splitting the given test set into Validation set and Test set in order to get better results.~~
+ [x] ~~Try training the model for more epochs > 10 epochs~~ 
+ [x] ~~Try EarlyStopping to protect the model from overfitting the data~~
+ [x] ~~Try different kinds of pretrained networks like AlexNet , ResNet , etc..~~
+ [ ] ~~Try adding more Convolutional layers and make your model more complex.~~ ```Not Needed```
+ [ ] ~~Try getting a larger data set.~~    ```Not Needed```
+ 
 
-    2. Try training the model for more epochs > 10 epochs
+With these methods we can get error that is close to ```error ~ 0.5%``` ✅
 
-    3. Try adding more Convolutional layers and make your model more complex.
+![68 Decrease Error](https://i.ibb.co/DfRTcdM/Screen-Shot-2020-05-13-at-4-11-33-PM.png)
 
-    4. Try getting a larger data set.
+Error now has decreased to ``` ~ 0.004  ``` on both **Training** and **Validation** Sets
 
-
-With these methods we can get error that is close to ```error ~ 0.5%```
 
 <br />
 
-## Installation
-
+### Prerequisites
 
 This project uses opncv library [opencv](https://pypi.org/project/opencv-python/) and [PyTorch](https://pytorch.org/docs/stable/index.html) to install these libraries.
 
-#### Install OpenCv :
+**Install OpenCv :**
 ```bash
 pip install opencv-python
 ```
-#### Install PyTorch :
+**Install PyTorch :**
 ```bash
 pip3 install torch torchvision
-
 ```
 <br />
 
 ## Network Architecture 
 
+Used [```ResNet```](https://medium.com/@14prakash/understanding-and-implementing-architectures-of-resnet-and-resnext-for-state-of-the-art-image-cf51669e1624) instead of the below architecture 
+
 ```python
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-# can use the below import should you choose to initialize the weights of your Net
 import torch.nn.init as I
+import torchvision.models as models
 
-def ___init___(self):
-# 5 Convolutional Layers 
-    self.conv1 = nn.Conv2d(1, 32, 5)
-    self.conv2 = nn.Conv2d(32, 64, 3)
-    self.conv3 = nn.Conv2d(64, 128, 3)
-    self.conv4 = nn.Conv2d(128, 256, 3)
-    self.conv5 = nn.Conv2d(256, 512, 1)
-
-# MaxPooling Layer to decrease the width and height to half the input layer
-
-    self.pool = nn.MaxPool2d(2, 2)
-
-# Two Fully-Connected Layers 
-
-    self.fc1 = nn.Linear(512 * 6 * 6  , 1024)
-    self.fc2 = nn.Linear(1024,136)
-
-
-# A Dropout Layer to eliminate overfitting
-
-    self.drop1 = nn.Dropout(p = 0.1)
-    self.drop2 = nn.Dropout(p = 0.2)
-    self.drop3 = nn.Dropout(p = 0.25)
-    self.drop4 = nn.Dropout(p = 0.3)
-    self.drop5 = nn.Dropout(p = 0.4)
-        
-```
-<br />
-
-## Forward Pass Technique 
-
-```python
-
-def forward(self, x):
-  
-        ## x is the input image (grayscale image with
-        ##dimensions (224x224)
-
-        ## 1. Pass the input image (224x224) to the a 
-        ##    Convolutional Layer + ReLU + MaxPooling Layer
-        ## 2. Add dropout layer after each step 
-
-      
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.drop1(x)
-        
-        x = self.pool(F.relu(self.conv2(x)))
-        x = self.drop2(x)
-        
-        x = self.pool(F.relu(self.conv3(x)))
-        x = self.drop3(x)
-        
-        x = self.pool(F.relu(self.conv4(x)))
-        x = self.drop3(x)
-        
-        x = self.pool(F.relu(self.conv5(x)))
-        x = self.drop4(x)
-
-        ## 3. Flatten the output of the last layers 
-        ## to be fed into the Fully-Connected Layer
-
-        x = x.view(x.size(0), -1)
-
-        ## 4. Fed the output to the fully-connected layer and add 
-        ## drouout.
-        
-        x = F.relu(self.fc1(x))
-        
-        x = self.drop5(x)
-        
-        ## 5. output of the netword would be (136,1)
-        ## Which is pairs of (x,y) that defines the 
-        ## desired  Facial points 
-   
-        x = self.fc2(x)
-
-
-        # a modified x, having gone through all 
-        #the layers of your model, should be returned
-
-
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.resnet18 = models.resnet18(pretrained=True)
+        # change from supporting color to gray scale images
+        self.resnet18.conv1 = 
+                            nn.Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2),
+                            padding=(3, 3), bias=False)
+        n_inputs = self.resnet18.fc.in_features
+        self.resnet18.fc = nn.Linear(n_inputs, 136)
+                        
+    def forward(self, x):
+        x = self.resnet18(x)
         return x
-        
 ```
 <br />
 
 ## Optimizer and Loss Function Used 
 
 ```python 
+
 import torch.optim as optim
 
-criterion = nn.SmoothL1Loss()
+criterion = nn.SmoothL1Loss().cuda if device == 'cuda' else nn.SmoothL1Loss()
 
-optimizer = optim.Adam(net.parameters(), lr = 0.001)
+#To Turn on the gradients after being disabled in the Network Architecture 
+
+optimizer = optim.Adam(filter(lambda p: p.requires_grad,net.parameters()), lr = 0.001)
+
+
 ```
 
 <br />
+## Authors
+
+* **Ahmed Abd-Elbakey Ghonem** - [**Github**](https://github.com/3ba2ii)
 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+
+## Acknowledgments
+
+* Hat tip to [@stefanonardo](https://github.com/stefanonardo) whose EarlyStopping class code was used 
 
 
