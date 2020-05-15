@@ -12,7 +12,7 @@ This project is all about defining and training a convolutional neural network t
 
 ## Description 
 
-This model takes an input image and make transformations  to it like converting it to grayscale image , reclaing it to be (224x224) and Normalizing its values to be in range [0,1].
+This model takes an input image and makes transformations  to it like converting it to grayscale image , reclaing it to be (224x224) and Normalizing its values to be in range [0,1].
 
 Then the image is fed to the network to predict the output facial keypoints of the input image with ~~````error ~ 2%````~~      ```error ~ 0.4% ```.
 
@@ -51,7 +51,7 @@ Error now has decreased to ``` ~ 0.004  ``` on both **Training** and **Validatio
 
 ### Prerequisites
 
-This project uses opncv library [opencv](https://pypi.org/project/opencv-python/) and [PyTorch](https://pytorch.org/docs/stable/index.html) to install these libraries.
+This project [opencv](https://pypi.org/project/opencv-python/) and [PyTorch](https://pytorch.org/docs/stable/index.html) to install these libraries.
 
 ##### Install OpenCv :
 ```bash
