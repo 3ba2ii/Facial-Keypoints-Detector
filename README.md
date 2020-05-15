@@ -51,7 +51,7 @@ Error now has decreased to ``` ~ 0.004  ``` on both **Training** and **Validatio
 
 ### Prerequisites
 
-This project [opencv](https://pypi.org/project/opencv-python/) and [PyTorch](https://pytorch.org/docs/stable/index.html) to install these libraries.
+This project uses [opencv](https://pypi.org/project/opencv-python/) and [PyTorch](https://pytorch.org/docs/stable/index.html) to install these libraries.
 
 ##### Install OpenCv :
 ```bash
